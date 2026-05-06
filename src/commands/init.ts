@@ -65,9 +65,18 @@ export async function runInit(flags: { interactive: boolean; force: boolean }): 
       skipped.push(file)
       continue
     }
-    const content = await fetchTemplate(file)
-    const filled = answers ? fillPlaceholders(content, answers) : content
-    writeTemplate(join(claudeDir, file), filled)
+
+    let content: string
+    if (file === 'architecture.md' && answers?.notionArchitecture) {
+      content = answers.notionArchitecture
+    } else if (file === 'engineering-guidelines.md' && answers?.notionEngineering) {
+      content = answers.notionEngineering
+    } else {
+      content = await fetchTemplate(file)
+      if (answers) content = fillPlaceholders(content, answers)
+    }
+
+    writeTemplate(join(claudeDir, file), content)
     created.push(file)
   }
 

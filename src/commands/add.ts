@@ -46,12 +46,20 @@ export async function runAdd(fileKey: string, flags: { interactive: boolean; for
 
   const spinner = p.spinner()
   spinner.start(`Fetching ${fileName}...`)
-  const content = await fetchTemplate(fileName)
-  spinner.stop()
 
-  const filled = answers ? fillPlaceholders(content, answers) : content
+  let content: string
+  if (fileName === 'architecture.md' && answers?.notionArchitecture) {
+    content = answers.notionArchitecture
+  } else if (fileName === 'engineering-guidelines.md' && answers?.notionEngineering) {
+    content = answers.notionEngineering
+  } else {
+    const raw = await fetchTemplate(fileName)
+    content = answers ? fillPlaceholders(raw, answers) : raw
+  }
+
+  spinner.stop()
   ensureDir(claudeDir)
-  writeTemplate(filePath, filled)
+  writeTemplate(filePath, content)
 
   console.log(`Added .claude/${fileName}`)
 }

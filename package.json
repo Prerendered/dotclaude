@@ -9,5 +9,8 @@
   },
   "dependencies": {
     "@clack/prompts": "latest"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
   }
 }

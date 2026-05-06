@@ -9,7 +9,7 @@ Scaffold `.claude/` context files into any TypeScript project. Always pulls the 
 ```bash
 bunx github:Prerendered/dotclaude init
 
-# Interactive mode — fills in project details
+# Interactive mode — fills in project details and optionally pulls from Notion
 bunx github:Prerendered/dotclaude init --interactive
 ```
 
@@ -23,7 +23,7 @@ bunx github:Prerendered/dotclaude add engineering
 bunx github:Prerendered/dotclaude add architecture
 
 # Interactive mode works on add too
-bunx github:Prerendered/dotclaude add map --interactive
+bunx github:Prerendered/dotclaude add architecture --interactive
 ```
 
 ## Flags
@@ -43,6 +43,19 @@ bunx github:Prerendered/dotclaude add map --interactive
 | `_standards.md` | Global TypeScript, naming, component, git rules |
 | `engineering-guidelines.md` | Project-specific structure and Biome config |
 | `architecture.md` | Patterns, flows, code examples |
+
+## Notion integration
+
+In interactive mode you can pull your existing `architecture.md` and `engineering-guidelines.md` directly from Notion pages instead of filling in templates manually.
+
+When prompted, the CLI will walk you through a one-time setup:
+
+1. Go to [notion.so/my-integrations](https://www.notion.so/my-integrations) → **New integration**
+2. Name it (e.g. `dotclaude`) and copy the **Internal Integration Token** (`secret_...`)
+3. On each Notion page you want to use: **Share → Invite → your integration**
+4. Paste the token when prompted — saved to `~/.dotclaude/config.json` and reused on every future run
+
+After setup, just paste the page URL when asked. No IDs, no copying slugs.
 
 ## How it works
 
