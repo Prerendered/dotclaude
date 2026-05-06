@@ -1,0 +1,13 @@
+{
+  "name": "dotclaude",
+  "version": "1.0.0",
+  "bin": {
+    "dotclaude": "./bin/cli.ts"
+  },
+  "scripts": {
+    "dev": "bun run bin/cli.ts"
+  },
+  "dependencies": {
+    "@clack/prompts": "latest"
+  }
+}
